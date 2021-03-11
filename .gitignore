@@ -1,0 +1,9 @@
+# Frameworks/Libraries related files/folders
+node_modules
+
+# IDEs related files/folders
+.vscode
+.idea
+
+# Logs and configs
+*.log
