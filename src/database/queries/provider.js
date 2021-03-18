@@ -1,4 +1,4 @@
-const providerModel = require('../models/providerModel');
+const providerModel = require('../models/provider');
 
 const findById = () => {
 

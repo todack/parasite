@@ -1,4 +1,4 @@
-const domainModel = require('../models/domainModel');
+const domainModel = require('../models/domain');
 
 const findById = () => {
 

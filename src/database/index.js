@@ -1,9 +1,9 @@
-const userRepo = require('./repositories/userRepo');
-const domainRepo = require('./repositories/domainRepo');
-const providerRepo = require('./repositories/providerRepo');
+const userQueries = require('./queries/user');
+const domainQueries = require('./queries/domain');
+const providerQueries = require('./queries/provider');
 
 module.exports = {
-    userRepo,
-    domainRepo,
-    providerRepo
+    userQueries,
+    domainQueries,
+    providerQueries
 }
