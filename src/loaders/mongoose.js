@@ -1,16 +1,14 @@
 const mongoose = require('mongoose');
-const { db } = require('../config');
+const { dbUrl } = require('../config');
 const logger = require('./winston');
 
-const DB_URI = `https://mongodb+srv://${db.username}:${db.password}@${db.cluster}.mongodb.net/${db.dbname}?retryWrites=true&w=majority`;
 const options = {
 
 };
 
 module.exports = async () => {
-
     try {
-        await mongoose.connect(DB_URI, options);
+        await mongoose.connect(config.dbUrl, options);
         logger.info('Database connection successful!');
     } catch (e) {
         logger.error('Database connection failed!');
