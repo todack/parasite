@@ -6,6 +6,10 @@ const providerSchema = new mongoose.Schema({
         type: { type: mongoose.Types.ObjectId, ref: 'User' },
         required: true
     },
+    domain: {
+        type: { type: mongoose.Types.ObjectId, ref: 'Domain' },
+        required: true
+    },
     sourceUrl: {
         type: String,
         required: true

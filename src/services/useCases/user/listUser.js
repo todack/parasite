@@ -8,7 +8,7 @@ module.exports = function makeListUser({ userQueries }) {
        const user = await userQueries.findByEmail({ email });
 
        if (!user) {
-           throw new Error(`User with provided email doesn't exists`);
+           throw new Error(`User with provided email doesn't exist`);
        }
        
        return user;

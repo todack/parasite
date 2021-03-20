@@ -3,9 +3,10 @@ const mongoose = require('mongoose');
 const domainSchema = new mongoose.Schema({
     name: {
         type: String,
-        required: true
+        required: true,
+        unique: true
     },
-    class: {
+    className: {
         type: String,
         required: true
     },
@@ -13,18 +14,10 @@ const domainSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    fullDesc: {
+    longDesc: {
         type: String,
         required: true
     },
-    providers: {
-        type: [{ type: mongoose.Types.ObjectId, ref: 'Provider' }],
-        default: []
-    }
-});
-
-domainSchema.virtual('providersCount').get(function(){
-    return this.providers.length;
 });
 
 module.exports = mongoose.model('Domain', domainSchema);

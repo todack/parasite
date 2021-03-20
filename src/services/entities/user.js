@@ -1,10 +1,8 @@
-// This is an entity.
-
-module.exports = function buildMakeUser({ accessCodeGen, isValidEmail }){
+module.exports = function buildMakeUser({ isValidEmail, secretGen }){
     return ({ 
         email,
         username,
-        accessCode = accessCodeGen.generate(),
+        accessCode = secretGen.generate(),
         remainingCalls = 0,
         purchases = [],
         isPrivate = false
@@ -12,7 +10,7 @@ module.exports = function buildMakeUser({ accessCodeGen, isValidEmail }){
 
         // Write down all the business logic, validations, sanitisations here.
 
-        if (!isValidEmail(email)) {
+        if (!isValidEmail({ email })) {
             throw new Error(`Email is invalid, received: ${email}`);
         }
 
@@ -35,10 +33,10 @@ module.exports = function buildMakeUser({ accessCodeGen, isValidEmail }){
             getAccessCode: () => accessCode,
             setAccessCode: () => accessCode = accessCodeGen.generate(),
             getRemainingCalls: () => remainingCalls,
-            incRemainingCalls: () => ++remainingCalls,
-            decRemainingCalls: () => --remainingCalls,
+            incRemainingCalls: ({ amount = 1 }) => remainingCalls += amount,
+            decRemainingCalls: ({ amount = 1 }) => remainingCalls -= amount,
             getPurchases: () => purchases,
-            addPurchase: (purchase) => { purchases.push(purchase) },
+            addPurchase: ({ purchase }) => { purchases.push(purchase) },
             isPrivate: () => isPrivate,
         });
     }

@@ -3,7 +3,7 @@ const { makeUser } = require('../../entities')
 module.exports = function makeAddUser({ userQueries }) {
     return async ( userData )=> {
         const user = makeUser(userData);
-        const exists = userQueries.findByEmail({ email: user.getEmail() });
+        const exists = await userQueries.findByEmail({ email: user.getEmail() });
 
         if (exists) {
             throw new Error(`User with given email already exists`);
