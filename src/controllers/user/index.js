@@ -3,7 +3,7 @@ const {
     listUser, 
     editUser, 
     removeUser 
-} = require('../../services/user');
+} = require('../../services/useCases/user');
 
 const makeDeleteUser = require('./deleteUser');
 const makeGetUser = require('./getUser');
@@ -15,11 +15,9 @@ const getUser = makeGetUser({ listUser });
 const putUser = makePutUser({ addUser });
 const patchUser = makePatchUser({ editUser });
 
-const userController = Object.freeze({
+module.exports = Object.freeze({
     deleteUser,
     getUser,
     putUser,
     patchUser
 });
-
-module.exports = userController;

@@ -3,6 +3,7 @@ const { Router } = require('express');
 const userRoutes = require('./user');
 const domainRoutes = require('./domain');
 const providerRoutes = require('./provider');
+const requestRoutes = require('./request');
 
 const routes = Router();
 
@@ -21,5 +22,6 @@ routes.head('/', (req, res) => {
 routes.use('/user', userRoutes);
 routes.use('/domain', domainRoutes);
 routes.use('/provider', providerRoutes);
+routes.use('/request', requestRoutes);
 
 module.exports = routes;
