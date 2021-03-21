@@ -1,5 +1,10 @@
 const { Router } = require('express');
 const { makeCallback } = require('../helpers');
+const {
+    putDomain,
+    getDomain,
+    patchDomain
+} = require('../controllers/domain');
 
 const domainRoutes = Router();
 

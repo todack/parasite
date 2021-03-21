@@ -1,6 +1,6 @@
 const buildMakeUser = require('./user');
 const buildMakeDomain = require('./domain');
-const buildMakeProvider = require('.provider');
+const buildMakeProvider = require('./provider');
 
 const secretGen = require('../../helpers/secretGenerator');
 

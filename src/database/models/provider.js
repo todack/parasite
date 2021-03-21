@@ -3,11 +3,13 @@ const mongoose = require('mongoose');
 // Right now supports only token based auth.
 const providerSchema = new mongoose.Schema({
     author: {
-        type: { type: mongoose.Types.ObjectId, ref: 'User' },
+        type: mongoose.Types.ObjectId,
+        ref: 'User',
         required: true
     },
     domain: {
-        type: { type: mongoose.Types.ObjectId, ref: 'Domain' },
+        type: mongoose.Types.ObjectId,
+        ref: 'Domain',
         required: true
     },
     sourceUrl: {

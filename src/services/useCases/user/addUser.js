@@ -1,4 +1,4 @@
-const { makeUser } = require('../../entities')
+const { makeUser } = require('../../entities');
 
 module.exports = function makeAddUser({ userQueries }) {
     return async ( userData )=> {
