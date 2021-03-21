@@ -4,8 +4,13 @@ const { makeCallback } = require('../helpers');
 const domainRoutes = Router();
 
 domainRoutes.put('/', makeCallback(putDomain));
-domainRoutes.get('/:id', makeCallback(getDomain));
-domainRoutes.patch('/:id', makeCallback(patchDomain));
-domainRoutes.delete('/:id', makeCallback(deleteDomain));
+
+// allow to form query in get: /domain/?name=something.
+// an address should represent the path to the resource 
+// and not on what parameters to get the resource. So, there
+// is only one resource here and it is domain and hence, we 
+// must use get request to the root and to filter use params.
+domainRoutes.get('/', makeCallback(getDomain));
+domainRoutes.patch('/:name', makeCallback(patchDomain));
 
 module.exports = domainRoutes;

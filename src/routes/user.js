@@ -10,8 +10,10 @@ const {
 const userRoutes = Router();
 
 userRoutes.put('/', makeCallback(putUser));
-userRoutes.get('/:id', makeCallback(getUser));
-userRoutes.patch('/:id', makeCallback(patchUser));
-userRoutes.delete('/:id', makeCallback(deleteUser));
+
+// This may change after enabling authentication.
+userRoutes.get('/:email', makeCallback(getUser));
+userRoutes.patch('/:email', makeCallback(patchUser));
+userRoutes.delete('/:email', makeCallback(deleteUser));
 
 module.exports = userRoutes;
