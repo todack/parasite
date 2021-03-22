@@ -8,16 +8,16 @@ const {
 const makeGetProvider = require('./getProvider');
 const makeDeleteProvider = require('./deleteProvider');
 const makePatchProvider = require('./patchProvider');
-const makePutProvider = require('./putProvider');
+const makePostProvider = require('./postProvider');
 
 const getProvider = makeGetProvider({ listProvider });
 const deleteProvider = makeDeleteProvider({ removeProvider });
 const patchProvider = makePatchProvider({ editProvider });
-const putProvider = makePutProvider({ addProvider });
+const postProvider = makePostProvider({ addProvider });
 
 module.exports = Object.freeze({
     getProvider,
     deleteProvider,
     patchProvider,
-    putProvider
+    postProvider
 });

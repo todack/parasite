@@ -1,7 +1,7 @@
 const { Router } = require('express');
 const makeCallback = require('../helpers/makeCallback');
 const {
-    putUser,
+    postUser,
     getUser,
     patchUser,
     deleteUser
@@ -9,7 +9,7 @@ const {
 
 const userRoutes = Router();
 
-userRoutes.put('/', makeCallback(putUser));
+userRoutes.post('/', makeCallback(postUser));
 
 // This may change after enabling authentication.
 userRoutes.get('/:email', makeCallback(getUser));

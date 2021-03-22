@@ -1,14 +1,14 @@
 const { Router } = require('express');
 const { makeCallback } = require('../helpers');
 const {
-    putDomain,
+    postDomain,
     getDomain,
     patchDomain
 } = require('../controllers/domain');
 
 const domainRoutes = Router();
 
-domainRoutes.put('/', makeCallback(putDomain));
+domainRoutes.post('/', makeCallback(postDomain));
 
 // allow to form query in get: /domain/?name=something.
 // an address should represent the path to the resource 

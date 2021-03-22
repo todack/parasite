@@ -5,7 +5,7 @@ const {
 } = require('../../services/useCases/domain');
 
 const makeGetDomain = require('./getDomain');
-const makePutDomain = require('./putDomain');
+const makePostDomain = require('./postDomain');
 const makePatchDomain = require('./patchDomain');
 
 // Didn't make remove domain because don't know what to do with the 
@@ -15,11 +15,11 @@ const makePatchDomain = require('./patchDomain');
 // If every one is allowed then there should be no way to delete it.
 
 const getDomain = makeGetDomain({ listDomain });
-const putDomain = makePutDomain({ addDomain });
+const postDomain = makePostDomain({ addDomain });
 const patchDomain = makePatchDomain({ editDomain });
 
 module.exports = Object.freeze({
     getDomain,
-    putDomain,
+    postDomain,
     patchDomain
 });

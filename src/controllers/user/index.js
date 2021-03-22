@@ -7,17 +7,17 @@ const {
 
 const makeDeleteUser = require('./deleteUser');
 const makeGetUser = require('./getUser');
-const makePutUser = require('./putUser');
 const makePatchUser = require('./patchUser');
+const makePostUser = require('./postUser');
 
 const deleteUser = makeDeleteUser({ removeUser });
 const getUser = makeGetUser({ listUser });
-const putUser = makePutUser({ addUser });
+const postUser = makePostUser({ addUser });
 const patchUser = makePatchUser({ editUser });
 
 module.exports = Object.freeze({
     deleteUser,
     getUser,
-    putUser,
+    postUser,
     patchUser
 });

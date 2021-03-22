@@ -1,7 +1,7 @@
 const { Router } = require('express');
 const { makeCallback }= require('../helpers');
 const {
-    putProvider,
+    postProvider,
     getProvider,
     patchProvider,
     deleteProvider
@@ -9,7 +9,7 @@ const {
 
 const providerRoutes = Router();
 
-providerRoutes.put('/', makeCallback(putProvider));
+providerRoutes.post('/', makeCallback(postProvider));
 
 // allow to form query in get: 
 // /provider/?id=something.
