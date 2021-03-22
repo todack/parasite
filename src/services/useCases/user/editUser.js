@@ -18,12 +18,12 @@ module.exports = function makeEditUser({ userQueries }) {
         }
 
         // Always update the user throught its consturctor as it provides validation.
-        const updatedUser = makeUser({...existing, ...changes, accessCode: null });
+        const updatedUser = makeUser({...existing, ...changes, accessToken: null });
 
         return userQueries.update({
             email: updatedUser.getEmail(),
             username:  user.getUsername(),
-            accessCode: user.getAccessCode(),
+            accessToken: user.getAccessToken(),
             remainingCalls: user.getRemainingCalls(),
             purchases: user.getPurchases(),
             isPrivate: user.isPrivate()

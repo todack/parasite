@@ -2,7 +2,7 @@ module.exports = function buildMakeUser({ isValidEmail, secretGen }){
     return ({ 
         email,
         username,
-        accessCode = secretGen.generate(),
+        accessToken = secretGen.generate(),
         remainingCalls = 0,
         purchases = [],
         isPrivate = false
@@ -18,8 +18,8 @@ module.exports = function buildMakeUser({ isValidEmail, secretGen }){
             throw new Error(`Username must be atleast 2 characters long, received: ${username}`);
         }
 
-        if (!accessCode) {
-            throw new Error(`Access code generation failed, received: ${accessCode}`);
+        if (!accessToken) {
+            throw new Error(`Access token generation failed, received: ${accessToken}`);
         }
 
         if (remainingCalls < 0) {
@@ -30,8 +30,8 @@ module.exports = function buildMakeUser({ isValidEmail, secretGen }){
             getEmail: () => email,
             getUsername: () => username,
             setUsername: ( newUsername ) => username = newUsername,
-            getAccessCode: () => accessCode,
-            setAccessCode: () => accessCode = accessCodeGen.generate(),
+            getAccessToken: () => accessToken,
+            setAccessToken: () => accessToken = secretGen.generate(),
             getRemainingCalls: () => remainingCalls,
             incRemainingCalls: ({ amount = 1 }) => remainingCalls += amount,
             decRemainingCalls: ({ amount = 1 }) => remainingCalls -= amount,

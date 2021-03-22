@@ -1,14 +1,21 @@
 module.exports = function makeListDomain({ domainQueries }) {
-    return async ({ name }) => {
-        
-        if (!name) {
-            throw new Error(`Name must be provided, received: ${name}`);
+    return async ({ _id, name, className }) => {
+
+        let domain;
+
+        if (_id) {
+            domain = await domainQueries.findById({ _id });
+        } else {
+            let query = {};
+
+            if (name) query.name = name;
+            if (className) query.className = className;
+
+            domain = await domainQueries.findAll(query);
         }
 
-        const domain = await domainQueries.findByName({ name });
-
         if (!domain) {
-            throw new Error(`Domain with provided name doesn't exist`);
+            throw new Error(`Domain with provided properties doesn't exist`);
         }
 
         return domain;

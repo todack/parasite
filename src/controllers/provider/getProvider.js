@@ -1,8 +1,8 @@
 module.exports = function makeGetProvider({ listProvider }) {
     return async ( httpRequest ) => {
         const providerDetails = await listProvider({
-            ...httpRequest.params,
-            ...httpRequest.query
+            _id:httpRequest.params.id,
+            ...httpRequest.query,
         });
         return {
             statusCode: 200,

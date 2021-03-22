@@ -2,7 +2,12 @@ const { makeProvider } = require('../../entities');
 
 module.exports = function makeAddProvider({ providerQueries }) {
     return async ( providerData ) => {
-        const provider = makeProvider(providerData);
+        const provider = makeProvider({ 
+            ...providerData,
+            accessToken: null,
+            hits: null,
+            misses: null
+        });
         const sourceUrlExists = providerQueries.findBySourceUrl({ sourceUrl: provider.getSourceUrl() });
         
         if (sourceUrlExists) {

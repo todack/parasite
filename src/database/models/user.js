@@ -29,7 +29,7 @@ const userSchema = new mongoose.Schema({
     username: {
         type: String,
     },
-    accessCode: {
+    accessToken: {
         type: String,
         required: true,
         unique: true
