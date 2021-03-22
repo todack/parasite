@@ -1,5 +1,5 @@
 module.exports = function makePatchUser({ editUser }) {
-    return ( httpRequest ) => {
+    return async ( httpRequest ) => {
         const toEdit = {
             ...httpRequest.body,
             email: httpRequest.params.email

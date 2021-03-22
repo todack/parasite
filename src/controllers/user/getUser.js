@@ -1,5 +1,5 @@
-module.exports = async function makeGetUser({ listUser }) {
-    return ( httpRequest ) => {
+module.exports = function makeGetUser({ listUser }) {
+    return async ( httpRequest ) => {
         const userDetails = await listUser({ email: httpRequest.params.email });
         return {
             statusCode: 200,

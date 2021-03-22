@@ -1,5 +1,5 @@
-module.exports = async function makeDeleteUser({ removeUser }) {
-    return ( httpRequest ) => {
+module.exports = function makeDeleteUser({ removeUser }) {
+    return async ( httpRequest ) => {
         const deleted = await removeUser({ email: httpRequest.params.email });
         return {
             statusCode: 200,
