@@ -8,13 +8,13 @@ module.exports = function makeAddProvider({ providerQueries }) {
             hits: null,
             misses: null
         });
-        const sourceUrlExists = providerQueries.findBySourceUrl({ sourceUrl: provider.getSourceUrl() });
+        const sourceUrlExists = providerQueries.findAll({ sourceUrl: provider.getSourceUrl() });
         
         if (sourceUrlExists) {
             throw new Error(`Provider with the given source URL already exists`);
         }
 
-        const datasetSignatureExists = await providerQueries.findByDatasetSignature({ datasetSignature: provider.getDatasetSignature() });
+        const datasetSignatureExists = await providerQueries.findAll({ datasetSignature: provider.getDatasetSignature() });
 
         if (datasetSignatureExists) {
             // For now just keep this aside.

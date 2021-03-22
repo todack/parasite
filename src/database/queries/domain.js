@@ -1,10 +1,29 @@
 const domainModel = require('../models/domain');
 
-const findById = () => {
-
-};
-
-module.exports = {
+module.exports = Object.freeze({
+    findByName,
     findById,
-};
+    findAll,
+    insert,
+    update
+});
 
+async function findByName({ name }) {
+
+}
+
+async function findById({ _id }) {
+
+}
+
+async function findAll(queryData) {
+
+}
+
+async function insert(domainDetails) {
+
+}
+
+async function update({ _id, ...changes }) {
+
+}
