@@ -1,5 +1,9 @@
 module.exports = function makeDeleteProvider({ removeProvider }) {
-    return ({ }) => {
-
+    return async ( httpRequest ) => {
+        const deleted = await removeProvider({ _id: httpRequest.params.id });
+        return {
+            statusCode: 200,
+            deleted
+        }
     }
 }
