@@ -3,7 +3,9 @@ const { dbUrl } = require('../config');
 const logger = require('./winston');
 
 const options = {
-
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useFindAndModify: true
 };
 
 module.exports = async () => {
