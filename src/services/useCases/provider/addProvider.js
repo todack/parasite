@@ -4,13 +4,12 @@ module.exports = function makeAddProvider({ providerQueries }) {
     return async ( providerData ) => {
         const provider = makeProvider({ 
             ...providerData,
-            accessToken: null,
-            hits: null,
-            misses: null
+            hits: undefined,
+            misses: undefined
         });
-        const sourceUrlExists = providerQueries.findAll({ sourceUrl: provider.getSourceUrl() });
+        const sourceUrlExists = await providerQueries.findAll({ sourceUrl: provider.getSourceUrl() });
         
-        if (sourceUrlExists) {
+        if (sourceUrlExists.length > 0) {
             throw new Error(`Provider with the given source URL already exists`);
         }
 
@@ -22,13 +21,13 @@ module.exports = function makeAddProvider({ providerQueries }) {
         }
 
         return providerQueries.insert({
-            author: provider.getAuthor(),
-            domain: provider.getDomain(),
+            authorId: provider.getAuthorId(),
+            domainId: provider.getDomainId(),
             sourceUrl: provider.getSourceUrl(),
             requiresAuth: provider.requiresAuth(),
             accessToken: provider.getAccessToken(),
             format: provider.getFormat(),
-            desc: provider.getDesc(),
+            description: provider.getDescription(),
             hits:  provider.getHits(),
             misses: provider.getMisses(),
             datasetSignature: provider.getDatasetSignature()

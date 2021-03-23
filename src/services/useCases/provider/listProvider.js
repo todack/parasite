@@ -1,5 +1,5 @@
 module.exports = function makeListProvider({ providerQueries }) {
-    return async ({ _id, author, domain, requiresAuth, format }) => {
+    return async ({ _id, authorId, domainId, requiresAuth, format }) => {
 
         let provider;
 
@@ -8,8 +8,8 @@ module.exports = function makeListProvider({ providerQueries }) {
         } else {
             let query = {};
 
-            if (author) query.author = author;
-            if (domain) query.domain = domain;
+            if (authorId) query.authorId = authorId;
+            if (domainId) query.domainId = domainId;
             if (requiresAuth) query.requiresAuth = requiresAuth;
             if (format) query.format = format;
 

@@ -8,7 +8,7 @@ exports.initLoaders = async () => {
     const app = expressLoader();
 
     // Load mongoose
-    // await mongooseLoader();
+    await mongooseLoader();
 
     return app;
 };

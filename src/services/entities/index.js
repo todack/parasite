@@ -6,7 +6,7 @@ const secretGen = require('../../helpers/secretGenerator');
 
 const makeUser = buildMakeUser({ isValidEmail, secretGen });
 const makeDomain = buildMakeDomain({ isValidDomainName });
-const makeProvider = buildMakeProvider({ isValidUrl, isValidFormat, secretGen });
+const makeProvider = buildMakeProvider({ isValidUrl, isValidFormat });
 
 module.exports = Object.freeze({
     makeUser,

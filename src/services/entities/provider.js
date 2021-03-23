@@ -1,28 +1,32 @@
-module.exports = function buildMakeProvider({ isValidUrl, isValidFormat, secretGen }) {
+module.exports = function buildMakeProvider({ isValidUrl, isValidFormat }) {
     return ({
-        author,
-        domain,
+        authorId,
+        domainId,
         sourceUrl,
         requiresAuth = false,
-        accessToken = secretGen.generate(),
+        accessToken = null,
         format,
         description,
         hits = 0,
         misses = 0,
-        datasetSignature
+        datasetSignature = "imagenet-hash"
     }) => {
 
         // Write the business logic and validations here.
-        if (!author) {
-            throw new Error(`Author is required, received: ${author}`);
+        if (!authorId) {
+            throw new Error(`Author ID is required, received: ${authorId}`);
         }
 
-        if (!domain) {
-            throw new Error(`Domain is required, received: ${domain}`);
+        if (!domainId) {
+            throw new Error(`Domain ID is required, received: ${domainId}`);
         }
 
         if (!sourceUrl) {
             throw new Error(`A source URL is required, received: ${sourceUrl}`);
+        }
+
+        if (requiresAuth && !accessToken) {
+            throw new Error(`Access token not specified for provider that requires authentication`);
         }
 
         if (!isValidUrl({ url: sourceUrl })) {
@@ -42,8 +46,8 @@ module.exports = function buildMakeProvider({ isValidUrl, isValidFormat, secretG
         }
 
         return Object.freeze({
-            getAuthor: () => author,
-            getDomain: () => domain,
+            getAuthorId: () => authorId,
+            getDomainId: () => domainId,
             getSourceUrl: () => sourceUrl,
             requiresAuth: () => requiresAuth,
             getAccessToken: () => accessToken,

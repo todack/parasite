@@ -7,6 +7,6 @@ module.exports = function makeCallback( controller ) {
             res.set(httpResponse.headers);
         }
         res.type('json');
-        res.status(httpResponse.statusCode).send(httpResponse.body);
+        res.status(httpResponse.statusCode).send(httpResponse);
     }
 }

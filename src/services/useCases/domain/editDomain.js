@@ -14,12 +14,13 @@ module.exports = function makeEditDomain({ domainQueries }) {
         const existing = await domainQueries.findById({ _id });
         
         if (!existing) {
-            throw new Error(`Domain with given name doesn't exists`);
+            throw new Error(`Domain with given ID doesn't exists`);
         }
-
+                                                        
         const updatedDomain = makeDomain({ ...existing, ...changes });
 
         return domainQueries.update({
+            ...existing,
             name: updatedDomain.getName(),
             className: updatedDomain.getClassName(),
             shortDesc: updatedDomain.getShortDesc(),

@@ -9,7 +9,7 @@ module.exports = Object.freeze({
 });
 
 async function findByName({ name }) {
-    return await domainModel.find({ name }).lean().exec();
+    return await domainModel.findOne({ name }).lean().exec();
 }
 
 async function findById({ _id }) {
@@ -25,5 +25,6 @@ async function insert(domainDetails) {
 }
 
 async function update({ _id, ...changes }) {
-    return await findByIdAndUpdate(_id, changes).lean().exec();
+    let result = await domainModel.updateOne({ _id }, changes).lean().exec();
+    return result.nModified > 0 ? { _id, ...changes } : null;
 }

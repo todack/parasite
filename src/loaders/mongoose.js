@@ -5,12 +5,13 @@ const logger = require('./winston');
 const options = {
     useNewUrlParser: true,
     useUnifiedTopology: true,
-    useFindAndModify: true
+    useFindAndModify: true,
+    useCreateIndex: true
 };
 
 module.exports = async () => {
     try {
-        await mongoose.connect(config.dbUrl, options);
+        await mongoose.connect(dbUrl, options);
         logger.info('Database connection successful!');
     } catch (e) {
         logger.error('Database connection failed!');

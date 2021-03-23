@@ -21,9 +21,10 @@ async function insert(providerDetails) {
 }
 
 async function update({ _id, ...changes }) {
-    return await providerModel.findByIdAndUpdate(_id, changes).lean().exec();
+    const result = await providerModel.updateOne({ _id }, changes).lean().exec();
+    return result.nModified > 0 ? { _id, ...changes } : null;
 }
 
 async function remove({ _id }) {
-    return await providerModel.findByIdAndDelete(_id).lean().exec();
+    return await providerModel.deleteOne({ _id }).lean().exec();
 }

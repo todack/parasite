@@ -16,6 +16,7 @@ providerRoutes.post('/', makeCallback(postProvider));
 // /provider/?author=something.
 // /provider/?domain=something.
 providerRoutes.get('/', makeCallback(getProvider));
+providerRoutes.get('/:id', makeCallback(getProvider));
 providerRoutes.patch('/:id', makeCallback(patchProvider));
 providerRoutes.delete('/:id', makeCallback(deleteProvider));
 

@@ -5,6 +5,7 @@ module.exports = function makePatchUser({ editUser }) {
             email: httpRequest.params.email
         }
         const patched = await editUser(toEdit);
+        console.log("patched", patched);
         return {
             statusCode: 200,
             patched

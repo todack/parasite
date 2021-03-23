@@ -16,6 +16,7 @@ domainRoutes.post('/', makeCallback(postDomain));
 // is only one resource here and it is domain and hence, we 
 // must use get request to the root and to filter use params.
 domainRoutes.get('/', makeCallback(getDomain));
+domainRoutes.get('/:id', makeCallback(getDomain));
 domainRoutes.patch('/:id', makeCallback(patchDomain));
 
 module.exports = domainRoutes;

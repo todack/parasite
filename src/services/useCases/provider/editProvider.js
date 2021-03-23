@@ -13,16 +13,22 @@ module.exports = function makeEditProvider({ providerQueries }) {
             throw new Error(`Provider with the given id doesn't exist`);
         }
 
-        const updated = makeProvider({ ...existing, ...changes, accessToken: null });
+        // Hits and missses cannot be updated externally.
+        const updated = makeProvider({ 
+            ...existing, 
+            ...changes, 
+            hits: existing.hits, 
+            misses: existing.misses 
+        });
 
         return providerQueries.update({
-            author: updated.getAuthor(),
-            domain: updated.getDomain(),
+            authorId: updated.getAuthorId(),
+            domainId: updated.getDomainId(),
             sourceUrl: updated.getSourceUrl(),
             requiresAuth: updated.requiresAuth(),
             accessToken: updated.getAccessToken(),
             format: updated.getFormat(),
-            desc: updated.getDesc(),
+            description: updated.getDescription(),
             hits:  updated.getHits(),
             misses: updated.getMisses(),
             datasetSignature: updated.getDatasetSignature()
