@@ -26,8 +26,18 @@ const userSchema = new mongoose.Schema({
         required: true,
         unique: true
     },
+    password: {
+        type:  String, 
+        required: true,
+        select: false
+    },
     username: {
         type: String,
+    },
+    verified: {
+        type: Boolean,
+        required: true,
+        default: false
     },
     accessToken: {
         type: String,

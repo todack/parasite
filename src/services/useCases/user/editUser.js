@@ -1,7 +1,7 @@
 const { makeUser } = require('../../entities');
 
 module.exports = function makeEditUser({ userQueries }) {
-    return async ({ email, ...changes }) => {
+    return async ({ email, isVerified, accessToken, ...changes }) => {
         
         if (!email) {
             throw new Error(`Email must be provided, received: ${email}`);
@@ -18,10 +18,12 @@ module.exports = function makeEditUser({ userQueries }) {
         }
 
         // Always update the user throught its consturctor as it provides validation.
-        const updatedUser = makeUser({...existing, ...changes, accessToken: undefined });
+        const updatedUser = await makeUser({ ...existing, ...changes });
 
         return userQueries.update({
             email: updatedUser.getEmail(),
+            password: updatedUser.getPassword(),
+            isVerified: updatedUser.getVerified(),
             username:  updatedUser.getUsername(),
             accessToken: updatedUser.getAccessToken(),
             remainingCalls: updatedUser.getRemainingCalls(),

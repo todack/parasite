@@ -1,10 +1,9 @@
 const buildMakeUser = require('./user');
 const buildMakeDomain = require('./domain');
 const buildMakeProvider = require('./provider');
+const { secretGenerator, hash } = require('../../helpers');
 
-const secretGen = require('../../helpers/secretGenerator');
-
-const makeUser = buildMakeUser({ isValidEmail, secretGen });
+const makeUser = buildMakeUser({ isValidEmail, secretGenerator, hash });
 const makeDomain = buildMakeDomain({ isValidDomainName });
 const makeProvider = buildMakeProvider({ isValidUrl, isValidFormat });
 

@@ -1,8 +1,10 @@
-module.exports = function buildMakeUser({ isValidEmail, secretGen }){
-    return ({ 
+module.exports = function buildMakeUser({ isValidEmail, secretGenerator, hash }){
+    return async ({ 
         email,
-        username,
-        accessToken = secretGen.generate(),
+        password,
+        isVerified = false,
+        username = `user#${secretGenerator.generate(5)}`,
+        accessToken = secretGenerator.generate(25),
         remainingCalls = 0,
         purchases = [],
         isPrivate = false
@@ -14,7 +16,13 @@ module.exports = function buildMakeUser({ isValidEmail, secretGen }){
             throw new Error(`Email is invalid, received: ${email}`);
         }
 
-        if (!username && username.length < 2) {
+        if (!password) {
+            throw new Error(`Password must be provided, received: ${password}`);
+        } else {
+            password = await hash({ password });
+        }
+
+        if (username && username.length < 2) {
             throw new Error(`Username must be atleast 2 characters long, received: ${username}`);
         }
 
@@ -28,10 +36,12 @@ module.exports = function buildMakeUser({ isValidEmail, secretGen }){
 
         return Object.freeze({
             getEmail: () => email,
+            getPassword: () => password,
             getUsername: () => username,
             setUsername: ( newUsername ) => username = newUsername,
+            isVerified: () => isVerified,
             getAccessToken: () => accessToken,
-            setAccessToken: () => accessToken = secretGen.generate(),
+            setAccessToken: () => accessToken = secretGen.generate(25),
             getRemainingCalls: () => remainingCalls,
             incRemainingCalls: ({ amount = 1 }) => remainingCalls += amount,
             decRemainingCalls: ({ amount = 1 }) => remainingCalls -= amount,

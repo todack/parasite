@@ -1,5 +1,6 @@
 const express = require('express');
 const helmet = require('helmet');
+const cors = require('cors');
 
 const config = require('../config');
 const routes = require('../routes');
@@ -10,6 +11,9 @@ module.exports = () => {
 
     // Security and addons
     app.use(helmet());
+
+    // Cors as it says.
+    app.use(cors());
 
     // Parsers
     app.use(express.json());

@@ -1,10 +1,11 @@
 const { makeUser } = require('../../entities');
 
 module.exports = function makeAddUser({ userQueries }) {
-    return async ( { email, username } )=> {
-        const user = makeUser({ 
+    return async ( { email, username, password } )=> {
+        const user = await makeUser({ 
             email,
-            username
+            username,
+            password
         });
         const exists = await userQueries.findByEmail({ email: user.getEmail() });
 
@@ -14,6 +15,8 @@ module.exports = function makeAddUser({ userQueries }) {
 
         return userQueries.insert({
             email: user.getEmail(),
+            password: user.getPassword(),
+            isVerified: user.isVerified(),
             username: user.getUsername(),
             accessToken: user.getAccessToken(),
             remainingCalls: user.getRemainingCalls(),

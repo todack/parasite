@@ -4,7 +4,7 @@ module.exports = function makeListUser({ userQueries }) {
         if (!email) {
            throw new Error(`Email must be provided, received: ${email}`);
        }
-       
+
        const user = await userQueries.findByEmail({ email });
 
        if (!user) {

@@ -2,16 +2,23 @@ const userModel = require('../models/user');
 
 module.exports = Object.freeze({
     findByEmail,
+    getPasswordByEmail,
     insert,
     update,
     remove
 });
+
+async function getPasswordByEmail({ email }) {
+    return await userModel.findOne({ email }).select('+password').lean().exec();
+}
 
 async function findByEmail({ email }) {
     return await userModel.findOne({ email }).lean().exec();
 }
 
 async function insert(userDetails) {
+    // this thing here returns password, 
+    // delete doesn't work.
     return await userModel.create(userDetails);
 }
 
