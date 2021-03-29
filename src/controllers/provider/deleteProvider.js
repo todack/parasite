@@ -3,7 +3,7 @@ module.exports = function makeDeleteProvider({ removeProvider }) {
         const deleted = await removeProvider({ _id: httpRequest.params.id });
         return {
             statusCode: 200,
-            deleted
+            body: deleted
         }
     }
 }

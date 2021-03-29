@@ -3,7 +3,7 @@ module.exports = function makePostProvider({ addProvider }) {
         const created = await addProvider(httpRequest.body);
         return {
             statusCode: 201,
-            created
+            body: created
         }
     }
 }

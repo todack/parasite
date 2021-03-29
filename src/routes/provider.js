@@ -6,10 +6,11 @@ const {
     patchProvider,
     deleteProvider
 } = require('../controllers/provider');
+const { authHandler } = require('../middlewares');
 
 const providerRoutes = Router();
 
-providerRoutes.post('/', makeCallback(postProvider));
+providerRoutes.post('/', authHandler, makeCallback(postProvider));
 
 // allow to form query in get: 
 // /provider/?id=something.
@@ -17,7 +18,7 @@ providerRoutes.post('/', makeCallback(postProvider));
 // /provider/?domain=something.
 providerRoutes.get('/', makeCallback(getProvider));
 providerRoutes.get('/:id', makeCallback(getProvider));
-providerRoutes.patch('/:id', makeCallback(patchProvider));
-providerRoutes.delete('/:id', makeCallback(deleteProvider));
+providerRoutes.patch('/:id', authHandler, makeCallback(patchProvider));
+providerRoutes.delete('/:id', authHandler, makeCallback(deleteProvider));
 
 module.exports = providerRoutes;

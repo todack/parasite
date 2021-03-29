@@ -5,7 +5,7 @@ module.exports = function({ addUser }) {
         const created = await addUser(httpRequest.body);
         return {
             statusCode: 201,
-            body: { created }
+            body: created
         }
     }
 }

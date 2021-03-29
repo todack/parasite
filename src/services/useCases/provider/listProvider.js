@@ -1,3 +1,5 @@
+const { NotFoundError } = require('../../../helpers');
+
 module.exports = function makeListProvider({ providerQueries }) {
     return async ({ _id, authorId, domainId, requiresAuth, format }) => {
 
@@ -18,7 +20,7 @@ module.exports = function makeListProvider({ providerQueries }) {
         }
 
         if (!provider) {
-            throw new Error(`Provider with the given id doesnt't exists`);
+            throw new NotFoundError("provider", null);
         }
 
         return provider;

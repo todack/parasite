@@ -1,3 +1,5 @@
+const { MissingPropertyError, InvalidPropertyError, InternalServerError } = require("../../helpers");
+
 module.exports = function buildMakeUser({ isValidEmail, secretGenerator, hash }){
     return async ({ 
         email,
@@ -11,27 +13,30 @@ module.exports = function buildMakeUser({ isValidEmail, secretGenerator, hash })
     }) => {
 
         // Write down all the business logic, validations, sanitisations here.
+        if (!email) {
+            throw new MissingPropertyError("email", email);
+        }
 
         if (!isValidEmail({ email })) {
-            throw new Error(`Email is invalid, received: ${email}`);
+            throw new InvalidPropertyError("email is incorrect", email);
         }
 
         if (!password) {
-            throw new Error(`Password must be provided, received: ${password}`);
+            throw new MissingPropertyError("password", password);
         } else {
             password = await hash({ password });
         }
 
         if (username && username.length < 2) {
-            throw new Error(`Username must be atleast 2 characters long, received: ${username}`);
+            throw new InvalidPropertyError(`username must be atleast 2 characters long`, username);
         }
 
         if (!accessToken) {
-            throw new Error(`Access token generation failed, received: ${accessToken}`);
+            throw new InternalServerError(`accessToken generation failed`, accessToken);
         }
 
         if (remainingCalls < 0) {
-            throw new Error(`Remaining calls cannot be negative, received: ${remainingCalls}`);
+            throw new InvalidPropertyError(`Remaining calls cannot be negative`, remainingCalls);
         }
 
         return Object.freeze({

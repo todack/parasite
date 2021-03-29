@@ -1,20 +1,21 @@
 const { makeDomain } = require('../../entities');
+const { NotFoundError, MissingPropertyError } = require('../../../helpers');
 
 module.exports = function makeEditDomain({ domainQueries }) {
     return async ({ _id, ...changes }) => {
 
         if (!_id) {
-            throw new Error(`Name must be provided, received: ${_id}`);
+            throw new MissingPropertyError("id", _id);
         }
 
         if (!changes) {
-            throw new Error(`Changes either not specified or not allowed`);
+            throw new MissingPropertyError(null, changes);
         }
 
         const existing = await domainQueries.findById({ _id });
         
         if (!existing) {
-            throw new Error(`Domain with given ID doesn't exists`);
+            throw new NotFoundError("domain", _id);
         }
                                                         
         const updatedDomain = makeDomain({ ...existing, ...changes });

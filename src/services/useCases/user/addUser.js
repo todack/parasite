@@ -1,4 +1,5 @@
 const { makeUser } = require('../../entities');
+const { IllegalResourceCreationError } = require('../../../helpers');
 
 module.exports = function makeAddUser({ userQueries }) {
     return async ( { email, username, password } )=> {
@@ -10,7 +11,7 @@ module.exports = function makeAddUser({ userQueries }) {
         const exists = await userQueries.findByEmail({ email: user.getEmail() });
 
         if (exists) {
-            throw new Error(`User with given email already exists`);
+            throw new IllegalResourceCreationError("user", user.getEmail());
         }
 
         return userQueries.insert({

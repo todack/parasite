@@ -1,3 +1,5 @@
+const { MissingPropertyError, InvalidPropertyError }
+
 module.exports = function buildMakeProvider({ isValidUrl, isValidFormat }) {
     return ({
         authorId,
@@ -14,35 +16,35 @@ module.exports = function buildMakeProvider({ isValidUrl, isValidFormat }) {
 
         // Write the business logic and validations here.
         if (!authorId) {
-            throw new Error(`Author ID is required, received: ${authorId}`);
+            throw new MissingPropertyError("authorId", authorId);
         }
 
         if (!domainId) {
-            throw new Error(`Domain ID is required, received: ${domainId}`);
+            throw new MissingPropertyError("domainId", domainId);
         }
 
         if (!sourceUrl) {
-            throw new Error(`A source URL is required, received: ${sourceUrl}`);
+            throw new MissingPropertyError("sourceUrl", sourceUrl);
         }
 
         if (requiresAuth && !accessToken) {
-            throw new Error(`Access token not specified for provider that requires authentication`);
+            throw new MissingPropertyError("accessToken", accessToken);
         }
 
         if (!isValidUrl({ url: sourceUrl })) {
-            throw new Error(`Source URL is not valid, received: ${sourceUrl}`);
+            throw new InvalidPropertyError("sourceUrl doesn't follow url scheme", sourceUrl);
         }
 
         if (!isValidFormat({ format })) {
-            throw new Error(`Invalid format provided, received: ${format}`);
+            throw new InvalidPropertyError("format is unknown", format);
         }
 
         if (!description) {
-            throw new Error(`A description about the provider is required, received: ${description}`);
+            throw new MissingPropertyError("description", description);
         }
 
         if (!datasetSignature) {
-            throw new Error(`Dataset signature is required, recieved: ${datasetSignature}`);
+            throw new MissingPropertyError("datasetSignature", datasetSignature);
         }
 
         return Object.freeze({

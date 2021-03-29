@@ -1,4 +1,5 @@
 const { makeProvider } = require('../../entities');
+const { IllegalResourceCreationError } = require('../../../helpers');
 
 module.exports = function makeAddProvider({ providerQueries }) {
     return async ( providerData ) => {
@@ -10,14 +11,14 @@ module.exports = function makeAddProvider({ providerQueries }) {
         const sourceUrlExists = await providerQueries.findAll({ sourceUrl: provider.getSourceUrl() });
         
         if (sourceUrlExists.length > 0) {
-            throw new Error(`Provider with the given source URL already exists`);
+            throw new IllegalResourceCreationError("sourceUrl", provider.getSourceUrl());
         }
 
         const datasetSignatureExists = await providerQueries.findAll({ datasetSignature: provider.getDatasetSignature() });
 
         if (datasetSignatureExists) {
             // For now just keep this aside.
-            // throw new Error(`Provider with the given dataset signature already exists`);
+            // throw new IllegalResourceCreationError("provider", value);
         }
 
         return providerQueries.insert({

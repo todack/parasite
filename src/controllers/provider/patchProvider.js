@@ -6,7 +6,7 @@ module.exports = function makePatchProvider({ editProvider }) {
         });
         return {
             statusCode: 200,
-            patched
+            body: patched
         }
     }
 }

@@ -1,6 +1,6 @@
 // follows the middleware structure.
 
-module.exports = function makeAuth({ authUser }) {
+module.exports = function makeAuthHandler({ authUser }) {
     return (req, res, next) => {
         // Credentials will always be in headers.
         // Three modes in which you can authenticate or authorize.

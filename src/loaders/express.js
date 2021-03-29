@@ -4,6 +4,7 @@ const cors = require('cors');
 
 const config = require('../config');
 const routes = require('../routes');
+const { errorHandler } = require('../middlewares');
 
 module.exports = () => {
 
@@ -23,6 +24,7 @@ module.exports = () => {
     app.use(config.apiPrefix, routes);
 
     // Error handlers
+    app.use(errorHandler);
 
     return app;
 }

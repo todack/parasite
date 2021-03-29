@@ -1,4 +1,5 @@
 const { makeDomain } = require('../../entities');
+const { IllegalResourceCreationError } = require('../../../helpers');
 
 module.exports = function makeAddDomain({ domainQueries }) {
     return async ( domainData ) => {
@@ -6,7 +7,7 @@ module.exports = function makeAddDomain({ domainQueries }) {
         const exists = await domainQueries.findByName({ name: domain.getName() });
         
         if (exists) {
-            throw new Error(`Provided domain already exists`);
+            throw new IllegalResourceCreationError("domain", domain.getName());
         }
 
         return domainQueries.insert({

@@ -8,7 +8,7 @@ module.exports = function makePatchUser({ editUser }) {
         console.log("patched", patched);
         return {
             statusCode: 200,
-            patched
+            body: patched
         }
     }
 }

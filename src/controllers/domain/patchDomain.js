@@ -7,7 +7,7 @@ module.exports = function makePatchDomain({ editDomain }) {
         const patched = await editDomain(toEdit);
         return {
             statusCode: 200,
-            patched
+            body: patched
         }
     }
 }

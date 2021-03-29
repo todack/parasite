@@ -1,3 +1,5 @@
+const { NotfoundError } = require('../../../helpers');
+
 module.exports = function makeListDomain({ domainQueries }) {
     return async ({ _id, name, className }) => {
 
@@ -15,7 +17,7 @@ module.exports = function makeListDomain({ domainQueries }) {
         }
 
         if (!domain) {
-            throw new Error(`Domain with provided properties doesn't exist`);
+            throw new NotFoundError("domain", _id);
         }
 
         return domain;
