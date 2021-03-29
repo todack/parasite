@@ -9,7 +9,8 @@ module.exports = Object.freeze({
 });
 
 async function getPasswordByEmail({ email }) {
-    return await userModel.findOne({ email }).select('+password').lean().exec();
+    let res = await userModel.findOne({ email }).select('password').lean().exec();
+    return res ? res.password : null;
 }
 
 async function findByEmail({ email }) {

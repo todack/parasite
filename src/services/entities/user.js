@@ -32,7 +32,7 @@ module.exports = function buildMakeUser({ isValidEmail, secretGenerator, hash })
         }
 
         if (!accessToken) {
-            throw new InternalServerError(`accessToken generation failed`, accessToken);
+            throw new InternalServerError(`accessToken generation failed`);
         }
 
         if (remainingCalls < 0) {

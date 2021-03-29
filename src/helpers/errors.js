@@ -19,16 +19,16 @@ class InvalidPropertyError extends Error {
 }
 
 class InternalServerError extends Error {
-    constructor(message, value) {
-        super(`${message}, received ${value}`);
-        this.stutus = 500;
+    constructor(message) {
+        super(message);
+        this.status = 500;
         this.name = "InternalServerError";
     }
 }
 
 class IllegalResourceCreationError extends Error {
     constructor(property, value) {
-        super(`Resource with given ${property} already exists, received ${value}.`);
+        super(`Resource with given ${property} already exist, received ${value}.`);
         this.status = 400;
         this.name = "IllegalResourceCreationError";
     }
@@ -37,12 +37,20 @@ class IllegalResourceCreationError extends Error {
 class NotFoundError extends Error {
     constructor(property, value) {
         if (!value) {
-            super(`${property[0].toUpperCase() + property.slice(1)} with given identifiers doesn't exists.`)
+            super(`${property[0].toUpperCase() + property.slice(1)} with given identifiers doesn't exist.`)
         } else {
-            super(`${property[0].toUpperCase() + property.slice(1)} with given identifier doesn't exists, received ${value}.`);
+            super(`${property[0].toUpperCase() + property.slice(1)} with given identifier doesn't exist, received ${value}.`);
         }
         this.status = 404;
         this.name = "NotFoundError";
+    }
+}
+
+class AuthenticationError extends Error {
+    constructor(message) {
+        super(message);
+        this.status = 401;
+        this.name = "AuthenticationError";
     }
 }
 
@@ -51,5 +59,6 @@ module.exports = {
     InvalidPropertyError,
     InternalServerError,
     IllegalResourceCreationError,
-    NotFoundError
+    NotFoundError,
+    AuthenticationError
 }

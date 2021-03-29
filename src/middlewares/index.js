@@ -1,6 +1,6 @@
 const makeAuthHandler = require('./authHandler');
 const makeErrorHandler = require('./errorHandler');
-const authUser = require('../services/useCases/user');
+const { authUser } = require('../services/useCases/user');
 
 const authHandler = makeAuthHandler({ authUser });
 const errorHandler = makeErrorHandler({ });
