@@ -1,11 +1,3 @@
-module.exports = {
-    MissingPropertyError,
-    InvalidPropertyError,
-    InternalServerError,
-    IllegalResourceCreationError,
-    NotFoundError
-}
-
 class MissingPropertyError extends Error {
     constructor(property, value) {
         if (!property){
@@ -52,4 +44,12 @@ class NotFoundError extends Error {
         this.status = 404;
         this.name = "NotFoundError";
     }
+}
+
+module.exports = {
+    MissingPropertyError,
+    InvalidPropertyError,
+    InternalServerError,
+    IllegalResourceCreationError,
+    NotFoundError
 }

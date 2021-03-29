@@ -1,4 +1,4 @@
-const { MissingPropertyError, InvalidPropertyError }
+const { MissingPropertyError, InvalidPropertyError } = require('../../helpers');
 
 module.exports = function buildMakeProvider({ isValidUrl, isValidFormat }) {
     return ({

@@ -1,17 +1,19 @@
 const config = require('./config');
-const { initLoaders, logger } = require('./loaders');
+const initLoaders = require('./loaders');
+const { logger } = require('./helpers');
 
 async function startServer() {
-    const app = await initLoaders();
 
-    app.listen(config.port, (e) => {
-        if (e) {
-            logger.error(e);
-            process.exit(1);
-        }
+    const { app } = await initLoaders();
 
+    app.listen(config.port, () => {
         logger.info(`Server listening on port: ${config.port}`);
     });
 }
 
-startServer();
+try {
+    startServer();
+} catch(e) {
+    logger.error(e);
+    process.exit(1);
+}

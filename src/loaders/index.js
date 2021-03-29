@@ -1,16 +1,16 @@
 const expressLoader = require('./express');
 const mongooseLoader = require('./mongoose');
-const logger = require('./winston');
+const { logger } = require('../helpers');
 
-exports.initLoaders = async () => {
+module.exports = async function initLoaders(){
 
-    // Load express
+    // Load express.
     const app = expressLoader();
+    logger.info("Express loaded successfully.");
 
-    // Load mongoose
-    await mongooseLoader();
+    // Load mongoose.
+    const db = await mongooseLoader();
+    logger.info("Database connected and loaded successfully.");
 
-    return app;
-};
-
-exports.logger = logger;
+    return { app, db };
+}
