@@ -3,7 +3,7 @@ class MissingPropertyError extends Error {
         if (!property){
             super(`One or more properties are missing, received: ${value}`);
         } else {
-            super(`${property} is required, received: ${value}.`);
+            super(`Property <${property}> is required, received: ${value}.`);
         }
         this.status = 400;
         this.name = "MissingPropertyError";

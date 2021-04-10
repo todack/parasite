@@ -5,8 +5,7 @@ module.exports = function buildMakeProvider({ isValidUrl, isValidFormat }) {
         authorId,
         domainId,
         sourceUrl,
-        requiresAuth = false,
-        accessToken = null,
+        auth,
         format,
         description,
         hits = 0,
@@ -27,8 +26,26 @@ module.exports = function buildMakeProvider({ isValidUrl, isValidFormat }) {
             throw new MissingPropertyError("sourceUrl", sourceUrl);
         }
 
-        if (requiresAuth && !accessToken) {
-            throw new MissingPropertyError("accessToken", accessToken);
+        if (!auth) {
+            throw new MissingPropertyError("auth", auth);
+        } else {
+            if (!auth.kind) {
+                throw new MissingPropertyError("auth.kind", auth.kind);
+            } else {
+                if (auth.kind === 'basic') {
+                    if (!auth.username && !auth.password) {
+                        throw new MissingPropertyError("auth.username and auth.password", undefined);
+                    } else if (!auth.username) {
+                        throw new MissingPropertyError("auth.password", auth.username);
+                    } else if (!auth.password) {
+                        throw new MissingPropertyError("auth.password", auth.password);
+                    } 
+                } else if (auth.kind === 'token') {
+                    if (!auth.token) throw new MissingPropertyError("auth.token", auth.token);
+                } else if (auth.kind !== 'none') {
+                    throw new InvalidPropertyError("Invalid auth kind", auth.kind); 
+                }
+            }
         }
 
         if (!isValidUrl({ url: sourceUrl })) {
@@ -51,8 +68,7 @@ module.exports = function buildMakeProvider({ isValidUrl, isValidFormat }) {
             getAuthorId: () => authorId,
             getDomainId: () => domainId,
             getSourceUrl: () => sourceUrl,
-            requiresAuth: () => requiresAuth,
-            getAccessToken: () => accessToken,
+            getAuth: () => auth,
             getFormat: () => format,
             getDescription: () => description,
             getHits: () => hits,

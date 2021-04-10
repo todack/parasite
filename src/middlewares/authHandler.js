@@ -14,14 +14,20 @@ module.exports = function makeAuthHandler({ authUser }) {
         // 2. Authorization: Bearer API-KEY
 
         try {
+
+            if (!req.headers.authorization) {
+                throw new AuthenticationError('Credentials not provided');
+            }
             const [ mode, creds ] = req.headers.authorization.split(" ");
             const [ email, password ] = Buffer.from(creds, 'base64').toString('utf-8').split(':');
 
             if (mode === 'Basic') {
-                let res = await authUser({ email, password });
+                let ret = await authUser({ email, password });
                 
-                if (res) next();
-                else next(new AuthenticationError('Invalid credentials'));
+                if (ret) {
+                    req.body.email = email;
+                    next();
+                } else next(new AuthenticationError('Invalid credentials'));
 
             } else if (mode === 'Bearer') {
 

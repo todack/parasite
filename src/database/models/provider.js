@@ -16,12 +16,9 @@ const providerSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    requiresAuth: {
-        type: Boolean,
-        default: false
-    },
-    accessToken: {
-        type: String,
+    auth: {
+        type: Map,
+        require: true
     },
     format: {
         type: String, // api, github

@@ -12,7 +12,6 @@ module.exports = function makeListProvider({ providerQueries }) {
 
             if (authorId) query.authorId = authorId;
             if (domainId) query.domainId = domainId;
-            if (requiresAuth) query.requiresAuth = requiresAuth;
             if (format) query.format = format;
 
             // Empty query means find all providers.
