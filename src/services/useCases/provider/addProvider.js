@@ -24,6 +24,7 @@ module.exports = function makeAddProvider({ providerQueries }) {
         return providerQueries.insert({
             authorId: provider.getAuthorId(),
             domainId: provider.getDomainId(),
+            name: provider.getName(),
             sourceUrl: provider.getSourceUrl(),
             auth: provider.getAuth(),
             format: provider.getFormat(),

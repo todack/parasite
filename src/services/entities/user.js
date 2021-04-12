@@ -20,15 +20,15 @@ module.exports = function buildMakeUser({ isValidEmail, secretGenerator, hash })
         if (!isValidEmail({ email })) {
             throw new InvalidPropertyError("email is incorrect", email);
         }
+        
+        if (username && username.length < 2) {
+            throw new InvalidPropertyError(`username must be atleast 2 characters long`, username);
+        }
 
         if (!password) {
             throw new MissingPropertyError("password", password);
         } else {
             password = await hash({ password });
-        }
-
-        if (username && username.length < 2) {
-            throw new InvalidPropertyError(`username must be atleast 2 characters long`, username);
         }
 
         if (!accessToken) {

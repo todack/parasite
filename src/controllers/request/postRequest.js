@@ -1,10 +1,11 @@
 // Controllers return an httpResponse with headers(optional), body and statusCode.
 
-module.exports = function makePostService({ someAlgorithm }) {
+module.exports = function makePostService({ processRequest }) {
     return async ( httpRequest ) => {
-        const inferenceResults = await someAlgorithm({
+        const inferenceResults = await processRequest({
             ...httpRequest.body,
-            domain: httpRequest.params.domain
+            domainId: httpRequest.params.domainId,
+            source: httpRequest.file
         });
         return {
             statusCode: 200,

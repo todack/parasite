@@ -1,6 +1,8 @@
-const { someAlgorithm } = require('../../services/useCases/common');
-const makePostService = require('./postService');
+const { processRequest, requestStatus } = require('../../services/useCases/request');
+const makePostRequest = require('./postRequest');
+const makeGetRequest = require('./getRequest');
 
-const postService = makePostService({ someAlgorithm });
+const postRequest = makePostRequest({ processRequest });
+const getRequest = makeGetRequest({ requestStatus });
 
-module.exports = Object.freeze({ postService });
+module.exports = Object.freeze({ postRequest, getRequest });

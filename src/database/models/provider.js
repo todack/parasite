@@ -12,6 +12,10 @@ const providerSchema = new mongoose.Schema({
         ref: 'Domain',
         required: true
     },
+    name: {
+        type: String,
+        required: true
+    },
     sourceUrl: {
         type: String,
         required: true

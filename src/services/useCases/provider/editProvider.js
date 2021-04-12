@@ -25,6 +25,7 @@ module.exports = function makeEditProvider({ providerQueries }) {
         return providerQueries.update({
             authorId: updated.getAuthorId(),
             domainId: updated.getDomainId(),
+            name: updated.getName(),
             sourceUrl: updated.getSourceUrl(),
             auth: updated.getAuth(),
             format: updated.getFormat(),

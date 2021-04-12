@@ -4,6 +4,7 @@ module.exports = function buildMakeProvider({ isValidUrl, isValidFormat }) {
     return ({
         authorId,
         domainId,
+        name,
         sourceUrl,
         auth,
         format,
@@ -20,6 +21,10 @@ module.exports = function buildMakeProvider({ isValidUrl, isValidFormat }) {
 
         if (!domainId) {
             throw new MissingPropertyError("domainId", domainId);
+        }
+
+        if (!name){
+            throw new MissingPropertyError("name", name);
         }
 
         if (!sourceUrl) {
@@ -67,6 +72,7 @@ module.exports = function buildMakeProvider({ isValidUrl, isValidFormat }) {
         return Object.freeze({
             getAuthorId: () => authorId,
             getDomainId: () => domainId,
+            getName: () => name,
             getSourceUrl: () => sourceUrl,
             getAuth: () => auth,
             getFormat: () => format,
