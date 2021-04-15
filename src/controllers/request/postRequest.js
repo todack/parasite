@@ -4,7 +4,6 @@ module.exports = function makePostService({ processRequest }) {
     return async ( httpRequest ) => {
         const inferenceResults = await processRequest({
             ...httpRequest.body,
-            domainId: httpRequest.params.domainId,
             source: httpRequest.file
         });
         return {
